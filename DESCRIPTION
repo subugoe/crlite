@@ -16,3 +16,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9999
 URL: https://github.com/subugoe/crlite
 BugReports: https://github.com/subugoe/crlite/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
