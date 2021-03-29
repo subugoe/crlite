@@ -1,7 +1,13 @@
-^crlite\.Rproj$
+^.*\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
 ^codecov\.yml$
-^pkgdown/_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+Dockerfile
+.dockerignore
+^\.github$
+.vscode
+LICENSE.md
+^vignettes/
+.azure
+.radian_history
