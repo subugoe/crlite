@@ -11,3 +11,4 @@ LICENSE.md
 ^vignettes/
 .azure
 .radian_history
+.lintr

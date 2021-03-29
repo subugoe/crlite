@@ -9,6 +9,7 @@
 NULL
 
 #' VERB the Crossref REST API
+#' @inheritDotParams httr::VERB
 #' @noRd
 verb_cr <- function(...) {
   httr::VERB(
@@ -23,4 +24,5 @@ verb_cr <- function(...) {
 get_cr <- function(...) verb_cr(verb = "GET", ...)
 
 #' HEAD the Crossref REST API
+#' @noRd
 head_cr <- function(...) verb_cr(verb = "HEAD", ...)
