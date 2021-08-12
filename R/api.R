@@ -1,20 +1,24 @@
 #' Use the [Crossref REST API](https://github.com/CrossRef/rest-api-doc)
 #' 
-#' @section Warning:
-#' If you are using this in your own package, or create a lot of traffic,
-#' please set your own [httr::user_agent()].
+#' @inheritDotParams httr::VERB
+#' 
+#' @param .contact
+#' a character string giving an email address to reach the user.
+#' Passed on to Crossref.
+#' Used  to contact the user if there are problems.
+#' Defaults to `NULL`.
+#' If provided, requests are served by a more performant
+#' [polite pool](https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service).
 #' 
 #' @family api
-#' @name api
-NULL
-
-#' VERB the Crossref REST API
-#' @inheritDotParams httr::VERB
-#' @noRd
-verb_cr <- function(...) {
+verb_cr <- function(...,
+                    .contact = getOption("crlite.contact", default = NULL)) {
   httr::VERB(
     url = "https://api.crossref.org/",
-    httr::user_agent("http://github.com/subugoe/crlite"),
+    httr::user_agent(paste0(
+      "http://github.com/subugoe/crlite",
+      if (!is.null(.contact)) paste0(" mailto:", .contact)
+    )),
     ...
   )
 }
