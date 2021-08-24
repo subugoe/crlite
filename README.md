@@ -33,3 +33,4 @@ To that end, it differs from the existing (and much more mature and comprehensiv
     In production, this allows for greater separation of concerns.
     Instead of worrying about efficient API usage, production code can call crlite depending on what makes idiomatic sense.
 1. crlite uses **[httr2](https://httr2.r-lib.org)**, not [crul](https://github.com/ropensci/crul) under the hood.
+1. crlite provides extensive support for the **higher-performance `polite` and `plus` API pools**.

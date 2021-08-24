@@ -29,11 +29,13 @@ BugReports: https://github.com/subugoe/crlite/issues
 Imports: 
     httr2,
     jsonlite (>= 1.7.2),
-    magrittr (>= 2.0.1)
+    magrittr (>= 2.0.1),
+    rlang (>= 0.4.11)
 Suggests: 
     testthat (>= 3.0.0),
     subugoetheme,
-    withr (>= 2.4.2)
+    withr (>= 2.4.2),
+    keyring (>= 1.2.0)
 Remotes:
   r-lib/httr2@0e5736387b857dcfaaba9be2dc0b0b7467e34ced,
   subugoe/subugoetheme@1.1.1

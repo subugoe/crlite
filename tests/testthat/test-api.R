@@ -1,23 +1,15 @@
 # unit tests ====
 
 test_that("user agent is properly set", {
-  expect_snapshot(req_cr()$options$useragent)
+  expect_equal(
+    req_cr()$options$useragent,
+    "crlite/0.0.0.9000(https://github.com/subugoe/crlite/)"
+  )
 })
+
 
 # integration tests ====
-
-test_that("w/o mailto, public pool is used", {
-  expect_equal(
-    httr2::req_perform(req_cr())$headers[["x-api-pool"]],
-    "public"
-  )
-})
-test_that("with mailto, public pool is used", {
-  withr::local_options(
-    crlite.mailto = "metacheck-support@sub.uni-goettingen.de"
-  )
-  expect_equal(
-    httr2::req_perform(req_cr())$headers[["x-api-pool"]],
-    "polite"
-  )
+test_that("api can be reached", {
+  skip_if_offline()
+  expect_true(can_api())
 })

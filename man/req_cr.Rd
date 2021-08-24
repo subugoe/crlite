@@ -4,26 +4,13 @@
 \alias{req_cr}
 \title{Use the \href{https://api.crossref.org/swagger-ui/index.html}{Crossref REST API}}
 \usage{
-req_cr(...)
-}
-\arguments{
-\item{...}{
-  Arguments passed on to \code{\link[=req_ua_cr]{req_ua_cr}}
-  \describe{
-    \item{\code{.mailto}}{a character string giving an email address to reach the user.
-Passed on to Crossref as part of the user agent.
-Used to contact the user if there are problems.
-Defaults to \code{NULL}.
-If provided, requests are served by a more performant
-\href{https://api.crossref.org/swagger-ui/index.html}{polite pool}.}
-    \item{\code{req}}{A \link[httr2]{request}.}
-  }}
+req_cr()
 }
 \description{
 Use the \href{https://api.crossref.org/swagger-ui/index.html}{Crossref REST API}
 }
 \seealso{
-Other api: 
-\code{\link{req_ua_cr}()}
+Other api functions: 
+\code{\link{can_api}()}
 }
-\concept{api}
+\concept{api functions}
