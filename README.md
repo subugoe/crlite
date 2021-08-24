@@ -16,7 +16,7 @@ To that end, it differs from the existing (and much more mature and comprehensiv
     It handles the API requests (authentication etc.) but otherwise leaves users to write their own queries.
     In production use, this may make the package more stable because it cuts a layer of complexity and allows more tightly focused queries and smaller data structures.
     In interactive use, this can cause more work.
-    crlite also aims to be more stable, and require less maintenance, 
+    crlite also aims to be more stable, and require less maintenance,
     because it does not replicate the crossref API.
     Callers will be responsible for adapting their code to changes in the API.
 1. crlite provides some **type- and length-stable field accessors**.

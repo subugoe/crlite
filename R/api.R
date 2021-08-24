@@ -1,7 +1,7 @@
 #' Use the [Crossref REST API](https://api.crossref.org/swagger-ui/index.html)
 #'
 #' @inheritDotParams req_ua_cr
-#' 
+#'
 #' @family api
 #' @export
 req_cr <- function(...) {
@@ -23,7 +23,8 @@ req_cr <- function(...) {
 #' @family api
 #' @keywords internal
 #' @export
-req_ua_cr <- function(req, .mailto = getOption("crlite.mailto", default = NULL)) {
+req_ua_cr <- function(req,
+                      .mailto = getOption("crlite.mailto", default = NULL)) {
   # input validation
   if (!is.null(.mailto)) stopifnot(is_email_address(.mailto))
   httr2::req_user_agent(
