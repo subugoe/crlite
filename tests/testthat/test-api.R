@@ -1,25 +1,23 @@
-# integration tests
+# unit tests ====
 
-# polite pool
-test_that("polite pool can be used", {
+test_that("user agent is properly set", {
+  expect_snapshot(req_cr()$options$useragent)
+})
+
+# integration tests ====
+
+test_that("w/o mailto, public pool is used", {
   expect_equal(
-    httr::headers(head_cr(path = "members/98"))[["x-api-pool"]],
+    httr2::req_perform(req_cr())$headers[["x-api-pool"]],
     "public"
   )
-  with_contact <- httr::headers(
-    head_cr(path = "members/98", .contact = "held@sub.uni-goettingen.de")
-  )
-  expect_equal(with_contact[["x-api-pool"]], "polite")
 })
-
-test_that("contact option is used", {
-  withr::local_options(crlite.contact = "held@sub.uni-goettingen.de")
+test_that("with mailto, public pool is used", {
+  withr::local_options(
+    crlite.mailto = "metacheck-support@sub.uni-goettingen.de"
+  )
   expect_equal(
-    httr::headers(head_cr(path = "members/98"))[["x-api-pool"]],
+    httr2::req_perform(req_cr())$headers[["x-api-pool"]],
     "polite"
   )
-})
-
-test_that("HEAD requests work", {
-  expect_equal(httr::status_code(head_cr(path = "members/98")), 200L)
 })

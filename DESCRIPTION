@@ -27,12 +27,14 @@ RoxygenNote: 7.1.1.9999
 URL: https://subugoe.github.io/crlite, https://github.com/subugoe/crlite
 BugReports: https://github.com/subugoe/crlite/issues
 Imports: 
-    httr (>= 1.4.2),
-    jsonlite (>= 1.7.2)
+    httr2,
+    jsonlite (>= 1.7.2),
+    magrittr (>= 2.0.1)
 Suggests: 
     testthat (>= 3.0.0),
     subugoetheme,
     withr (>= 2.4.2)
 Remotes:
-  subugoe/subugoetheme@1.1.1,
+  r-lib/httr2@0e5736387b857dcfaaba9be2dc0b0b7467e34ced,
+  subugoe/subugoetheme@1.1.1
 Config/testthat/edition: 3
