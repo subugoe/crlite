@@ -1,3 +1,12 @@
+# unit tests ====
+
+test_that("email from git config can be found", {
+  skip("Git is not available in much testing.")
+  expect_true(
+    is_email_address(suppressMessages(get_cr_mailto()))
+  )
+})
+
 # integration tests ====
 
 test_that("by default, public pool is used", {

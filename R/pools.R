@@ -1,11 +1,12 @@
+# testing ====
 #' Diagnosing API pools
 #' @name pools
-#' @family authentication functions
+#' @family api pool access functions
 NULL
 
 #' @describeIn pools Show the API pool which served a request
 #' @inheritParams httr2::resp_header
-#' @family authentication functions
+#' @family api pool access functions
 #' @export
 resp_cr_pool <- function(resp) {
   httr2::resp_header(resp, "x-api-pool")
@@ -25,4 +26,41 @@ was_pool <- function(resp, pool = c("public", "polite", "plus")) {
 can_pool <- function(pool = c("public", "polite", "plus")) {
   pool <- rlang::arg_match(pool)
   resp_cr_pool(httr2::req_perform(req_head_cr())) == pool
+}
+
+# mailto for polite ====
+#' Accessing the polite API pool
+#' @name polite
+#' @family api pool access functions
+NULL
+
+#' @describeIn polite
+#' Get the email address to authenticate into the polite pool
+#'
+#' In this order, returns the first hit of:
+#'
+#' 1. git user email address for the repo at the working directory
+#'    (requires git to be configured),
+#'
+#' Or errors out.
+#' @export
+get_cr_mailto <- function() {
+  if (requireNamespace("gert", quietly = TRUE)) {
+    mailto <- try(gert::git_signature_parse(gert::git_signature_default
+    ())$email)
+    if (is_email_address(mailto)) {
+      rlang::inform(
+        c(
+          "i" = paste(
+            "Using", mailto, "from your git config as a Crossref user."
+          )
+        ),
+        .frequency = "once",
+        .frequency_id = "get_cr_mailto"
+      )
+      return(mailto)
+    }
+  } else {
+    rlang::abort(c("x" = "Could not find a Crossref user."))
+  }
 }

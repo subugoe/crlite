@@ -34,4 +34,11 @@ Diagnosing API pools
 \item \code{can_pool}: Can the request be served by an expected pool?
 }}}
 
-\concept{authentication functions}
+\seealso{
+Other api pool access functions: 
+\code{\link{polite}}
+
+Other api pool access functions: 
+\code{\link{polite}}
+}
+\concept{api pool access functions}

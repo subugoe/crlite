@@ -3,6 +3,7 @@
 export("%>%")
 export(can_api)
 export(can_pool)
+export(get_cr_mailto)
 export(is_email_address)
 export(req_cr)
 export(resp_cr_pool)
