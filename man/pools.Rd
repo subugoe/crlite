@@ -36,9 +36,11 @@ Diagnosing API pools
 
 \seealso{
 Other api pool access functions: 
+\code{\link{plus}},
 \code{\link{polite}}
 
 Other api pool access functions: 
+\code{\link{plus}},
 \code{\link{polite}}
 }
 \concept{api pool access functions}

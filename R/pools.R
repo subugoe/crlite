@@ -64,3 +64,41 @@ get_cr_mailto <- function() {
     rlang::abort(c("x" = "Could not find a Crossref user."))
   }
 }
+
+# token for plus ====
+#' Accessing the plus API pool
+#' @name plus
+#' @family api pool access functions
+NULL
+
+
+#' @describeIn plus Get the token to authenticate into the plus tool.
+#'
+#' In this order, returns the first hit of:
+#'
+#' 1. `CR_MD_PLUS_TOKEN` environment variable
+#'     (recommended only for secure environment variables in the cloud),
+#' 1. an entry in the OS keychain manager for `service` and `username`,
+#' 1. `NULL` with a warning.
+#'
+#' @param service,username
+#' A character string giving the service and username
+#' under which the token can be found in the OS keychain.
+#'
+#' @export
+get_cr_token <- function(service = "https://api.crossref.org",
+                         username = get_cr_mailto()) {
+  if (Sys.getenv("CR_MD_PLUS_TOKEN") != "") {
+    return(Sys.getenv("CR_MD_PLUS_TOKEN"))
+  } else {
+    tryCatch(
+      expr = keyring::key_get(service = service, username = username),
+      error = function(x) {
+        warning(
+          "No crossref plus token could be found. ",
+          "Performance may be degraded."
+        )
+      }
+    )
+  }
+}

@@ -26,6 +26,7 @@ Or errors out.
 
 \seealso{
 Other api pool access functions: 
+\code{\link{plus}},
 \code{\link{pools}}
 }
 \concept{api pool access functions}
