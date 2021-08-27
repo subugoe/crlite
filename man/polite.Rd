@@ -15,10 +15,21 @@ Accessing the polite API pool
 \itemize{
 \item \code{get_cr_mailto}: Get the email address to authenticate into the polite pool
 
+Whenever possible, API calls should be identified by an email address
+to reach the human responsible for making the call.
 In this order, returns the first hit of:
 \enumerate{
-\item git user email address for the repo at the working directory
-(requires git to be configured),
+\item The \code{CR_MD_MAILTO} environment variable
+(recommended only for secure environment variables in the cloud).
+
+On GitHub Actions, you can set the \code{CR_MD_MAILTO} environment variable
+to the email of the committer by retrieving the
+\href{https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push}{pusher email}
+thus:\if{html}{\out{<div class="yaml">}}\preformatted{env:
+  CR_MD_MAILTO: $\{\{ github.event.pusher.email \}\}
+}\if{html}{\out{</div>}}
+\item The git user email address for the repo at the working directory.
+This
 }
 
 Or errors out.

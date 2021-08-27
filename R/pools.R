@@ -37,14 +37,39 @@ NULL
 #' @describeIn polite
 #' Get the email address to authenticate into the polite pool
 #'
+#' Whenever possible, API calls should be identified by an email address
+#' to reach the human responsible for making the call.
 #' In this order, returns the first hit of:
 #'
-#' 1. git user email address for the repo at the working directory
-#'    (requires git to be configured),
+#' 1. The `CR_MD_MAILTO` environment variable
+#'     (recommended only for secure environment variables in the cloud).
+#'
+#'     On GitHub Actions, you can set the `CR_MD_MAILTO` environment variable
+#'     to the email of the committer by retrieving the
+#'     [pusher email](https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push)
+#'     thus:
+#'
+#'    ```yaml
+#'    env:
+#'      CR_MD_MAILTO: ${{ github.event.pusher.email }}
+#'    ```
+#' 1. The git user email address for the repo at the working directory.
+#'    This
 #'
 #' Or errors out.
 #' @export
 get_cr_mailto <- function() {
+  mailto <- Sys.getenv("CR_MD_MAILTO")
+  if (is_email_address(mailto)) {
+    rlang::inform(c(
+      "i" = paste(
+        "Using",
+        mailto,
+        "from environment variable `CR_MD_MAILTO` as a Crossref user."
+      )
+    ))
+    return(mailto)
+  }
   if (requireNamespace("gert", quietly = TRUE)) {
     mailto <- try(gert::git_signature_parse(gert::git_signature_default
     ())$email)

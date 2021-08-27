@@ -1,11 +1,18 @@
 # unit tests ====
 
-test_that("email from git config can be found", {
-  skip("Git is not available in much testing.")
-  expect_true(
-    is_email_address(suppressMessages(get_cr_mailto()))
+test_that("email from env var can be found", {
+  # testing git email from git config too hard;
+  # many test envs won't have git available
+  withr::local_envvar(
+    c("CR_MD_MAILTO" = "metacheck-support@sub.uni-goettingen.de")
   )
+  expect_true(is_email_address(suppressMessages(get_cr_mailto())))
 })
+test_that("email from env var can be found on github actions", {
+  skip_if_not(Sys.getenv("GITHUB_ACTIONS") == "true")
+  expect_true(is_email_address(suppressMessages(get_cr_mailto())))
+})
+
 
 # integration tests ====
 
