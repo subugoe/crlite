@@ -1,27 +1,45 @@
 #' Use the [Crossref REST API](https://api.crossref.org/swagger-ui/index.html)
 #'
+#' @details
+#' Will always try to authenticate into the most performant API pool possible,
+#' but gracefully downgrades to less performant pools,
+#' when `mailto` or `token` cannot be found.
+#' See [req_auth_pool()] for details.
+#'
+#' @inheritParams req_auth_pool
 #' @family api functions
 #' @export
-req_cr <- function() {
-  httr2::request("https://api.crossref.org/") %>%
-    req_user_agent_cr()
+req_cr <- function(mailto = get_cr_mailto()) {
+  httr2::request("https://api.crossref.org/works") %>%
+    req_user_agent_cr(mailto = NULL) %>%
+    # below overwrites above ua, duplication is necessary 
+    # because only req_auth_pool() gives feedback
+    req_auth_pool(mailto = mailto)
 }
 
 #' Set a user agent
 #'
-#' To set a `mailto`, see [polite()].
-#'
+#' @param mailto a character scalar giving a valid email address.
 #' @inheritParams httr2::req_user_agent
-#' @noRd
-req_user_agent_cr <- function(req) {
-  httr2::req_user_agent(
-    req = req,
-    string = paste0(
+#' @keywords internal
+req_user_agent_cr <- function(req, mailto = NULL) {
+  if (is.null(mailto)) {
+    ua <- paste0(
       "crlite/",
       utils::packageVersion("crlite"),
       "(https://github.com/subugoe/crlite/)"
     )
-  )
+  } else {
+    ua <- paste0(
+      "crlite/",
+      utils::packageVersion("crlite"),
+      "(https://github.com/subugoe/crlite/; ",
+      "mailto:",
+      mailto,
+      ")"
+    )
+  }
+  httr2::req_user_agent(req = req, string = ua)
 }
 
 #' Test whether API can be reached

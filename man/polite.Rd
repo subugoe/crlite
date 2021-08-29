@@ -17,8 +17,9 @@ Accessing the polite API pool
 
 Whenever possible, API calls should be identified by an email address
 to reach the human responsible for making the call.
-In this order, returns the first hit of:
+In this order, returns the first valid email found in:
 \enumerate{
+\item The \code{crlite.mailto} option.
 \item The \code{CR_MD_MAILTO} environment variable
 (recommended only for secure environment variables in the cloud).
 
@@ -32,12 +33,12 @@ thus:\if{html}{\out{<div class="yaml">}}\preformatted{env:
 This
 }
 
-Or errors out.
+Otherwise, the function errors out.
 }}}
 
 \seealso{
 Other api pool access functions: 
 \code{\link{plus}},
-\code{\link{pools}}
+\code{\link{pools}()}
 }
 \concept{api pool access functions}

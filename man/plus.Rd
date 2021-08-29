@@ -31,6 +31,6 @@ In this order, returns the first hit of:
 \seealso{
 Other api pool access functions: 
 \code{\link{polite}},
-\code{\link{pools}}
+\code{\link{pools}()}
 }
 \concept{api pool access functions}

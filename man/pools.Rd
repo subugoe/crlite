@@ -2,36 +2,71 @@
 % Please edit documentation in R/pools.R
 \name{pools}
 \alias{pools}
+\alias{req_auth_pool}
 \alias{resp_cr_pool}
 \alias{was_pool}
 \alias{can_pool}
-\title{Diagnosing API pools}
+\alias{could_pool}
+\alias{best_pool}
+\title{Accessing different Crossref API pools}
 \usage{
+pools()
+
+req_auth_pool(req, mailto = get_cr_mailto())
+
 resp_cr_pool(resp)
 
-was_pool(resp, pool = c("public", "polite", "plus"))
+was_pool(resp, pool = pools())
 
-can_pool(pool = c("public", "polite", "plus"))
+can_pool(pool = pools())
+
+could_pool(pool = pools())
+
+best_pool(mailto = get_cr_mailto())
 }
 \arguments{
+\item{req}{A \link[httr2]{request}.}
+
+\item{mailto}{a character scalar giving a valid email address.}
+
 \item{resp}{An HTTP response object, as created by \code{\link[httr2:req_perform]{req_perform()}}.}
 
-\item{pool}{giving the name of the expected pool.
-Listed in order of increasing performance.}
+\item{pool}{giving the name of the expected pool}
 }
 \description{
-Diagnosing API pools
+In increasing order of performance: public, polite, plus.
 }
 \section{Related Functions and Methods}{
 \subsection{Functions}{
+\itemize{
+\item \code{req_auth_pool}: Try to authenticate into the highest performing pool
+
+Function checks whether a higher performance pool is possible,
+using \code{\link[=could_pool]{could_pool()}}.
+Only when that test passes, is the request authenticated.
+The function thus gracefully recovers from bad \code{mailto} and \code{token}s.
+The function emits intermittent messages about the chosen API pool.
+}
 \itemize{
 \item \code{resp_cr_pool}: Show the API pool which served a request
 }
 \itemize{
 \item \code{was_pool}: Was the request served by the expected pool?
+Inspects the response header "x-api-pool" of an \emph{existing} response
+to see if it matches the expected pool.
 }
 \itemize{
-\item \code{can_pool}: Can the request be served by an expected pool?
+\item \code{can_pool}: Can requests be served by an expected pool?
+Performs a request to the API and inspects the response header.
+}
+\itemize{
+\item \code{could_pool}: Could the request be served by an expected pool?
+Checks whether the necessary credentials can be found
+for higher performance pools.
+}
+\itemize{
+\item \code{best_pool}: What is the highest performing pool available?
+Checks the necessary credentials for the highest performing pool.
 }}}
 
 \seealso{

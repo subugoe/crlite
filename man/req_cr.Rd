@@ -4,10 +4,19 @@
 \alias{req_cr}
 \title{Use the \href{https://api.crossref.org/swagger-ui/index.html}{Crossref REST API}}
 \usage{
-req_cr()
+req_cr(mailto = get_cr_mailto())
+}
+\arguments{
+\item{mailto}{a character scalar giving a valid email address.}
 }
 \description{
 Use the \href{https://api.crossref.org/swagger-ui/index.html}{Crossref REST API}
+}
+\details{
+Will always try to authenticate into the most performant API pool possible,
+but gracefully downgrades to less performant pools,
+when \code{mailto} or \code{token} cannot be found.
+See \code{\link[=req_auth_pool]{req_auth_pool()}} for details.
 }
 \seealso{
 Other api functions: 
