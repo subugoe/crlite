@@ -15,6 +15,7 @@ test_that("email from env var can be found", {
 test_that("by default, public pool is used", {
   # knock out mailto
   withr::local_options(crlite.mailto = NULL)
+  withr::local_envvar(c("CR_MD_MAILTO" = NA))
   # knock out mdplus token
   withr::local_envvar(c("CR_MDPLUS_TOKEN" = NA))
   # knock out git email
