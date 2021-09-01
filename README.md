@@ -20,12 +20,12 @@ To that end, it differs from the existing (and much more mature and comprehensiv
     because it does not replicate the crossref API.
     Callers will be responsible for adapting their code to changes in the API.
 1. crlite provides some **type- and length-stable field accessors**.
-    The crossref API itself is, unfortunately, [not type- and length-stable](https://github.com/CrossRef/rest-api-doc/issues/551).
+    The crossref API itself is (? [https://github.com/subugoe/crlite/issues/20](#20)) [not type- and length-stable](https://github.com/CrossRef/rest-api-doc/issues/551).
     This instability is (unavoidably) imported into the rcrossref client, as it wrangles unstable API results into useful R objects.
     For example, in `rcrossref::cr_works()`, the order and number of columns [may differ](https://github.com/subugoe/metacheck/issues/183), depending on whether some field is included in the JSON returned from the corresponding `/works` endpoint.
     This is not the fault of rcrossref, but a necessary result of wrapping an unstable API in R dataframes (unless you want to reimplement the entire API spec in R to reassert stability).
     In interactive use, the instability may be a minor concern, outweighted by the convenience of ready-made R objects.
-    In production use, type- and length-instability can cause unexpected, hard to debug errors or requires ugly and non-idiomatic workarounds.
+    In production use, type- and length-instability can cause unexpected, hard to debug errors or requires non-idiomatic workarounds.
 
     By accessing only single *fields*, crlite can safely assert the type and content of the returned JSON, and return a type- and length-stable `NA` otherwise.
     These accessors, will, however remain tightly limited.
