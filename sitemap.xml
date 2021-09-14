@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://subugoe.github.io/crlite/index.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/can_api.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/crlite-package.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/is_email_address.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/plus.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/polite.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/pools.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/req_cr.html</loc>
+  </url>
+  <url>
+    <loc>https://subugoe.github.io/crlite/reference/req_user_agent_cr.html</loc>
+  </url>
+</urlset>
