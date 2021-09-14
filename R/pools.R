@@ -174,18 +174,17 @@ NULL
 #' 1. an entry in the OS keychain manager for `service` and `username`,
 #' 1. `NULL` with a warning.
 #'
-#' @param service,username
-#' A character string giving the service and username
-#' under which the token can be found in the OS keychain.
+#' @inheritParams keyring::key_get
+#' @inheritDotParams keyring::key_get
 #'
 #' @export
 get_cr_token <- function(service = "https://api.crossref.org",
-                         username = get_cr_mailto()) {
+                         ...) {
   if (Sys.getenv("CR_MD_PLUS_TOKEN") != "") {
     return(Sys.getenv("CR_MD_PLUS_TOKEN"))
   } else {
     tryCatch(
-      expr = keyring::key_get(service = service, username = username),
+      expr = keyring::key_get(service = service, ...),
       error = function(x) {
         warning(
           "No crossref plus token could be found. ",

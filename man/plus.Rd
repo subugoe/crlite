@@ -5,11 +5,20 @@
 \alias{get_cr_token}
 \title{Accessing the plus API pool}
 \usage{
-get_cr_token(service = "https://api.crossref.org", username = get_cr_mailto())
+get_cr_token(service = "https://api.crossref.org", ...)
 }
 \arguments{
-\item{service, username}{A character string giving the service and username
-under which the token can be found in the OS keychain.}
+\item{service}{Service name, a character scalar.}
+
+\item{...}{
+  Arguments passed on to \code{\link[keyring:key_get]{keyring::key_get}}
+  \describe{
+    \item{\code{username}}{Username, a character scalar, or \code{NULL} if the key
+is not associated with a username.}
+    \item{\code{keyring}}{For systems that support multiple keyrings, specify
+the name of the keyring to use here. If \code{NULL}, then the default
+keyring is used. See also \code{\link[keyring:has_keyring_support]{has_keyring_support()}}.}
+  }}
 }
 \description{
 Accessing the plus API pool
